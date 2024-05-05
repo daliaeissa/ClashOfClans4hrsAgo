@@ -20,10 +20,42 @@ void Fence::set_hit(){
     is_hit = true;
 }
 
-int Fence::health = 3;
+
+int Fence::health = 100;
 bool Fence::is_hit = false;
 
-void Fence::Display() {
+Fence::Fence(int x, int y):x(x),y(y) {
+    /*QTimer * time1 = new QTimer();
+    QObject::connect(time1, SIGNAL(timeout()),this,SLOT(Display()));
+    time1->start(1000);*/
+}
+/*void Fence::Display()
+{
+
+    if (scene())
+    {
+        // Iterate over all items in the scene
+        QList<QGraphicsItem*> itemsList = scene()->items();
+        for (QGraphicsItem* item : itemsList) {
+            // Check if the item is a QGraphicsTextItem and its position matches (x, y)
+            if (item->type() == QGraphicsTextItem::Type && item->pos() == QPointF(x(), y()))
+            {
+                scene()->removeItem(item); // Remove the previous health display
+                delete item; // Free memory allocated for the QGraphicsTextItem
+                Fence::is_hit = false;
+                break; // Stop iterating after finding and removing the item
+            }
+        }
+
+        // Create a new health display
+        QGraphicsTextItem* health_display = new QGraphicsTextItem;
+        health_display->setPlainText(QString("Health: ") + QString::number(Fence::getHealth()));
+        health_display->setDefaultTextColor(Qt::red);
+        health_display->setPos(x(), y());
+        scene()->addItem(health_display); // Add the updated health display
+    }
+}
+// void Fence::Display() {
     // if (scene()){
     //     QGraphicsTextItem* health_display = new QGraphicsTextItem;
     //     health_display->setPlainText(QString("Health: ") + QString::number(getHealth()));
@@ -39,14 +71,14 @@ void Fence::Display() {
     //     scene()->addItem(health_display);
     //     is_hit = false;
     // }
-    QList<QGraphicsItem*> colliding_items2 = collidingItems();
+  /*  QList<QGraphicsItem*> colliding_items2 = collidingItems();
     for(int i=0;i<colliding_items2.size();i++)
     {
         if(typeid(*(colliding_items2[i])) == typeid(Enemy))
         {
             //QTimer * timer = new QTimer();
             if(getHealth() > 0 && !is_hit){
-                this->decHealth();
+                //this->decHealth();
                 set_hit();
             }
             if(getHealth() == 0){
@@ -55,8 +87,8 @@ void Fence::Display() {
             }
             return;
         }
-    }
-    if (scene()) {
+    }*/
+    /*if (scene()) {
         // Iterate over all items in the scene
         QList<QGraphicsItem*> itemsList = scene()->items();
         for (QGraphicsItem* item : itemsList) {
@@ -75,12 +107,8 @@ void Fence::Display() {
         health_display->setDefaultTextColor(Qt::red);
         health_display->setPos(x, y);
         scene()->addItem(health_display); // Add the updated health display
-    }
-}
+    }*/
+//}
 
-Fence::Fence(int x, int y):x(x),y(y) {
-    QTimer * time1 = new QTimer();
-    QObject::connect(time1, SIGNAL(timeout()),this,SLOT(Display()));
-    time1->start(1000);
-}
+
 

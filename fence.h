@@ -18,8 +18,9 @@ public slots:
     static int getHealth();
     void incHealth();
     static void decHealth();
-    void Display();
+    //void Display();
     static void set_hit();
+
 };
 
 
