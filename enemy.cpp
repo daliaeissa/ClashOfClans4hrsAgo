@@ -1,6 +1,7 @@
 #include "enemy.h"
 #include "Fence.h"
 #include "Bullet.h"
+#include "worker.h"
 #include<QGraphicsScene>
 #include<QGraphicsView>
 #include<QThread>
@@ -88,17 +89,18 @@ void Enemy::move_right() {
         delete health; // Delete previous health display
         health = nullptr; // Reset health pointer
     }
-    // QList<QGraphicsItem*> colliding_items3 = collidingItems();
-    // for(int i = 0; i < colliding_items3.size(); i++){
-    // if(typeid(*(colliding_items3[i])) == typeid(Bullet)) {
+    QList<QGraphicsItem*> colliding_itemsworker1 = collidingItems();
+    for(int i = 0; i < colliding_itemsworker1.size(); i++){
+    if(typeid(*(colliding_itemsworker1[i])) == typeid(worker))
+        {
     //     if(enemy_health > 0){
     //         enemy_health--;
     //     }
     //     if(enemy_health == 0){
-    //         scene()->removeItem(this);
-    //         delete this;
-    //     }
-    // }
+         scene()->removeItem(colliding_itemsworker1[i]);
+        delete colliding_itemsworker1[i];
+      }
+    }
     // }
 
 }
@@ -153,17 +155,18 @@ void Enemy::move_left(){
         delete health2; // Delete previous health display
         health2 = nullptr; // Reset health pointer
     }
-    // QList<QGraphicsItem*> colliding_items3 = collidingItems();
-    // for(int i = 0; i < colliding_items3.size(); i++){
-    //     if(typeid(*(colliding_items3[i])) == typeid(Bullet)) {
-    //         if(enemy_health > 0){
-    //             enemy_health--;
-    //         }
-    //         if(enemy_health == 0){
-    //             scene()->removeItem(this);
-    //             delete this;
-    //         }
-    //     }
+    QList<QGraphicsItem*> colliding_itemsworker2 = collidingItems();
+    for(int i = 0; i < colliding_itemsworker2.size(); i++){
+        if(typeid(*(colliding_itemsworker2[i])) == typeid(worker))
+        {
+            //     if(enemy_health > 0){
+            //         enemy_health--;
+            //     }
+            //     if(enemy_health == 0){
+            scene()->removeItem(colliding_itemsworker2[i]);
+            delete colliding_itemsworker2[i];
+        }
+    }
     // }
 }
 
@@ -215,17 +218,18 @@ void Enemy::move_up(){
         delete health3; // Delete previous health display
         health3 = nullptr; // Reset health pointer
     }
-    // QList<QGraphicsItem*> colliding_items3 = collidingItems();
-    // for(int i = 0; i < colliding_items3.size(); i++){
-    //     if(typeid(*(colliding_items3[i])) == typeid(Bullet)) {
-    //         if(enemy_health > 0){
-    //             enemy_health--;
-    //         }
-    //         if(enemy_health == 0){
-    //             scene()->removeItem(this);
-    //             delete this;
-    //         }
-    //     }
+    QList<QGraphicsItem*> colliding_itemsworker3 = collidingItems();
+    for(int i = 0; i < colliding_itemsworker3.size(); i++){
+        if(typeid(*(colliding_itemsworker3[i])) == typeid(worker))
+        {
+            //     if(enemy_health > 0){
+            //         enemy_health--;
+            //     }
+            //     if(enemy_health == 0){
+            scene()->removeItem(colliding_itemsworker3[i]);
+            delete colliding_itemsworker3[i];
+        }
+    }
     // }
 }
 QGraphicsTextItem* health4 = nullptr;
@@ -276,17 +280,18 @@ void Enemy::move_down(){
         delete health4; // Delete previous health display
         health4 = nullptr; // Reset health pointer
     }
-    // QList<QGraphicsItem*> colliding_items3 = collidingItems();
-    // for(int i = 0; i < colliding_items3.size(); i++){
-    //     if(typeid(*(colliding_items3[i])) == typeid(Bullet)) {
-    //         if(enemy_health > 0){
-    //             enemy_health--;
-    //         }
-    //         if(enemy_health == 0){
-    //             scene()->removeItem(this);
-    //             delete this;
-    //         }
-    //     }
+    QList<QGraphicsItem*> colliding_itemsworker4 = collidingItems();
+    for(int i = 0; i < colliding_itemsworker4.size(); i++){
+        if(typeid(*(colliding_itemsworker4[i])) == typeid(worker))
+        {
+            //     if(enemy_health > 0){
+            //         enemy_health--;
+            //     }
+            //     if(enemy_health == 0){
+            scene()->removeItem(colliding_itemsworker4[i]);
+            delete colliding_itemsworker4[i];
+        }
+    }
     // }
 }
 
