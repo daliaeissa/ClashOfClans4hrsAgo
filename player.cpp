@@ -13,6 +13,12 @@ Player::Player(QGraphicsScene* scene, Fence** arr) : arr(arr) {
     scene->addItem(this); // Add the player to the scene
 }
 
+bool Player::Right = false;
+bool Player::Left = false;
+bool Player::Up = false;
+bool Player::Down = false;
+
+
 
 void Player::createEnemy(){
     Enemy* enemy = new Enemy(arr);

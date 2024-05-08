@@ -15,6 +15,10 @@ public:
     Player(QGraphicsScene* scene, Fence** arr);
     Fence** arr;
     int angle=0;
+    static bool Right;
+    static bool Left;
+    static bool Up;
+    static bool Down;
 public slots:
     void createEnemy();
     void keyPressEvent(QKeyEvent * event) override;

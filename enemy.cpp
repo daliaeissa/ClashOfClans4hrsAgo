@@ -2,12 +2,14 @@
 #include "Fence.h"
 #include "Bullet.h"
 #include "worker.h"
+#include"player.h"
 #include<QGraphicsScene>
 #include<QGraphicsView>
 #include<QThread>
 #include<QDebug>
 #include<QPixmap>
 #include<QGraphicsPixmapItem>
+#include"clan.h"
 
 /*void Enemy::hit_fence(){
     Fence::decHealth();
@@ -32,14 +34,94 @@ void Enemy::hit(int i){
     }
 }
 
+void Enemy::goToClanRight(){
+    if(x()<=225 && y()<=300){
+        setPos(x()+5,y()+5);
+    }
+    if(x()<=225 && y()>300){
+        setPos(x()+5,y()-5);
+    }
+    QList<QGraphicsItem*> colliding_itemsClan = collidingItems();
+    for(int i = 0; i < colliding_itemsClan.size(); i++){
+        if(typeid(*(colliding_itemsClan[i])) == typeid(Clan))
+        {
+            clanCollision = true;
+            setPos(x(),y());
+        }
+    }
+}
+void Enemy::goToClanLeft(){
+    if(x()>=300 && y()<=300){
+        setPos(x()-5,y()+5);
+    }
+    if(x()>300 && y()>300){
+        setPos(x()-5,y()-5);
+    }
+    QList<QGraphicsItem*> colliding_itemsClan = collidingItems();
+    for(int i = 0; i < colliding_itemsClan.size(); i++){
+        if(typeid(*(colliding_itemsClan[i])) == typeid(Clan))
+        {
+            clanCollision = true;
+            setPos(x(),y());
+        }
+    }
+}
+void Enemy::goToClanUp(){
+    if(x()<=225 && y()>=300){
+        setPos(x()+1,y()-1);
+    }
+    if(x()>=275 && y()>300){
+        setPos(x()-1,y()-1);
+    }
+    if(x()>225 && x()<275 && y()>300){
+        setPos(x(),y()-5);
+    }
+    QList<QGraphicsItem*> colliding_itemsClan = collidingItems();
+    for(int i = 0; i < colliding_itemsClan.size(); i++){
+        if(typeid(*(colliding_itemsClan[i])) == typeid(Clan))
+        {
+            clanCollision = true;
+            setPos(x(),y());
+        }
+    }
+}
+void Enemy::goToClanDown(){
+    if(x()<=225 && y()<=300){
+        setPos(x()+1,y()+1);
+    }
+    if(x()>275 && y()<300){
+        setPos(x()-1,y()+1);
+    }
+    if(x()>225 && x()<275 && y()<300){
+        setPos(x(),y()+5);
+    }
+    QList<QGraphicsItem*> colliding_itemsClan = collidingItems();
+    for(int i = 0; i < colliding_itemsClan.size(); i++){
+        if(typeid(*(colliding_itemsClan[i])) == typeid(Clan))
+        {
+            clanCollision = true;
+            setPos(x(),y());
+        }
+    }
+}
+
 bool is_hit = false;
 QGraphicsTextItem* health = nullptr; // Declare health outside the loop
 
 
 // Inside Enemy::move_right() function
 void Enemy::move_right() {
-    setPos(x() + 5, y());
+    // if(x() != 225){
+        setPos(x() + 5, y());
+    // }
+
     QList<QGraphicsItem*> colliding_items2 = collidingItems();
+
+    // if(/*health_arr[0] <= 0*/Player::Right){
+    //     if(x()<250-x() && y()<300-y()){
+    //         setPos(x()+1, y()+10);
+    //     }
+    // }
 
     for(int i = 0; i < colliding_items2.size(); i++) {
         // if(typeid(*(colliding_items2[i])) == typeid(Bullet)) {
@@ -52,6 +134,7 @@ void Enemy::move_right() {
         //         break;
         //     }
         // }
+
         if(typeid(*(colliding_items2[i])) == typeid(Fence)) {
             setPos(125, y());
             is_hit = true;
@@ -62,24 +145,31 @@ void Enemy::move_right() {
                     health->setPos(50, 250);
                     scene()->addItem(health); // Add health to the correct scene
                 }
-                if (health->scene() != scene()) { // Check if health is in the correct scene
+                if (scene() && health->scene() != scene()) { // Check if health is in the correct scene
                     scene()->addItem(health); // Add health to the correct scene
                 }
                 health->setPlainText(QString("Health: ") + QString::number(health_arr[0]));
             }
             if(health_arr[0] <= 0){ // Check if arr[0] exists and health is non-positive
                 if (scene()) { // Check if scene exists
+
                     scene()->removeItem(arr[0]);
+                    scene()->removeItem(this);
                 } else {
                     qDebug() << "Enemy scene is null";
                 }
                 delete arr[0];
                 arr[0] = nullptr; // Set arr[0] to null pointer after deletion
-                while(x()!=400){
-                    setPos(x()+5, y());
-                }
+                Player::Right = true;
+
+                setPos(x(),y());
             }
             return;
+        }
+        if (scene()) { // Check if scene exists
+
+            //scene()->removeItem(arr[0]);
+            scene()->removeItem(this);
         }
         // Collision with bullet
 
@@ -133,21 +223,31 @@ void Enemy::move_left(){
                     health2->setPos(400, 250);
                     scene()->addItem(health2); // Add health2 to the correct scene
                 }
-                if (health2->scene() != scene()) { // Check if health2 is in the correct scene
+                if (scene() && health2->scene() != scene()) { // Check if health2 is in the correct scene
                     scene()->addItem(health2); // Add health2 to the correct scene
                 }
                 health2->setPlainText(QString("Health: ") + QString::number(health_arr[1]));
             }
-            if(health_arr[1] <= 0){ // Check if arr[1] exists and health is non-positive
+            if(health_arr[1] <= 0){ // Check if arr[0] exists and health is non-positive
                 if (scene()) { // Check if scene exists
+
                     scene()->removeItem(arr[1]);
+                    scene()->removeItem(this);
                 } else {
                     qDebug() << "Enemy scene is null";
                 }
                 delete arr[1];
-                arr[1] = nullptr; // Set arr[1] to null pointer after deletion
+                arr[1] = nullptr; // Set arr[0] to null pointer after deletion
+                Player::Left = true;
+
+                setPos(x(),y());
             }
             return;
+        }
+        if (scene()) { // Check if scene exists
+
+            //scene()->removeItem(arr[0]);
+            scene()->removeItem(this);
         }
     }
     if (health2 && scene()) { // Check if health item exists and scene exists
@@ -201,14 +301,19 @@ void Enemy::move_up(){
                 }
                 health3->setPlainText(QString("Health: ") + QString::number(health_arr[3]));
             }
-            if(health_arr[3] <= 0){ // Check if arr[1] exists and health is non-positive
+            if(health_arr[3] <= 0){ // Check if arr[0] exists and health is non-positive
                 if (scene()) { // Check if scene exists
+
                     scene()->removeItem(arr[3]);
+                    scene()->removeItem(this);
                 } else {
                     qDebug() << "Enemy scene is null";
                 }
                 delete arr[3];
-                arr[3] = nullptr; // Set arr[1] to null pointer after deletion
+                arr[3] = nullptr; // Set arr[0] to null pointer after deletion
+                Player::Up = true;
+
+                setPos(x(),y());
             }
             return;
         }
@@ -263,14 +368,19 @@ void Enemy::move_down(){
                 }
                 health4->setPlainText(QString("Health: ") + QString::number(health_arr[2]));
             }
-            if(health_arr[2] <= 0){ // Check if arr[1] exists and health is non-positive
+            if(health_arr[2] <= 0){ // Check if arr[0] exists and health is non-positive
                 if (scene()) { // Check if scene exists
-                    scene()->removeItem(arr[2]);
+
+                    scene()->removeItem(arr[0]);
+                    scene()->removeItem(this);
                 } else {
                     qDebug() << "Enemy scene is null";
                 }
                 delete arr[2];
-                arr[2] = nullptr; // Set arr[1] to null pointer after deletion
+                arr[2] = nullptr; // Set arr[0] to null pointer after deletion
+                Player::Down = true;
+
+                setPos(x(),y());
             }
             return;
         }
@@ -311,64 +421,137 @@ Enemy::Enemy(Fence** arr):arr(arr) {
     // setPixmap(enemy.scaled(25,25));
 
     setRect(0, 0, 25, 25);
-    int x1, random_number_y1, x2, random_number_x3, y3, y4;
-    // Left and Right columns
-    x1 = 0;
-    x2 = 550;
 
-    //random_number_y1.display();
-    // Up and Down
-    random_number_x3 = rand() % (251) + 150;
-    random_number_y1 = rand() % 501;
+    int left_x = 0;
+    int right_x = 550;
+    int LR_y = (rand() % 3 + 1) * 100;
 
-    y3 = 0;
-    y4 = 450;
+    int down_y = 500;
+    int down_x = (rand() % 2 + 2) * 100;
 
-    //Left and right
-    int arr_1[4] = {x1, random_number_y1, x2, random_number_y1};
-
-    //Up and Down
-    int arr_2[4] = {y3, random_number_x3, y4, random_number_x3};
-
-    // Randomizes the choice either arr[0] or arr[2]
-    int final_random = rand()%2;
-    final_random *= 2;
-    // Decides which array to access
-    int arr_decider = rand() % 2;
-    arr_decider = arr_decider * 2 + 4;
-    if(arr_decider == 4){
-        setPos(arr_1[final_random], arr_1[final_random+1]);
+    // Decides left or right or down
+    // int direction_arr1[2] = {left_x, right_x};
+    int decider = rand() % 3;
+    if(decider == 0){
+        setPos(left_x, LR_y);
     }
-    else{
-        setPos(arr_2[final_random+1], arr_2[final_random]);
+    if(decider == 1){
+        setPos(right_x, LR_y);
+    }
+    if(decider == 2){
+        setPos(down_x, down_y);
     }
 
-    // Decide which way to move
-    if(arr_decider == 4 && final_random == 0){
+    // Decides the y for left or right and the x for down
+
+
+
+    // int x1, random_number_y1, x2, random_number_x3, y3, y4;
+    // // Left and Right columns
+    // x1 = 0;
+    // x2 = 550;
+
+    // //random_number_y1.display();
+    // // Up and Down
+    // random_number_x3 = rand() % (251) + 150;
+    // random_number_y1 = rand() % 501;
+
+    // y3 = 0;
+    // y4 = 450;
+
+    // //Left and right
+    // int arr_1[4] = {x1, random_number_y1, x2, random_number_y1};
+
+    // //Up and Down
+    // int arr_2[4] = {y3, random_number_x3, y4, random_number_x3};
+
+    // // Randomizes the choice either arr[0] or arr[2]
+    // int final_random = rand()%2;
+    // final_random *= 2;
+    // // Decides which array to access
+    // int arr_decider = rand() % 2;
+    // arr_decider = arr_decider * 2 + 4;
+    // if(arr_decider == 4){
+    //     setPos(arr_1[final_random], arr_1[final_random+1]);
+    // }
+    // else{
+    //     setPos(arr_2[final_random+1], arr_2[final_random]);
+    // }
+
+    // // Decide which way to move
+    if(x() == 0 && !Player::Right){
         // move right
         QTimer * timer = new QTimer();
         connect(timer, SIGNAL(timeout()),this,SLOT (move_right()));
         timer->start(50);
+        if(Player::Right){
+            timer->stop();
+        }
     }
-    if(arr_decider == 4 && final_random == 2){
+    if(x() == 550 && !Player::Left){
         // move left
         QTimer * timer = new QTimer();
         connect(timer, SIGNAL(timeout()),this,SLOT (move_left()));
         timer->start(50);
+        if(Player::Left){
+            timer->stop();
+        }
     }
-    if(arr_decider == 6 && final_random == 0){
-        // move down
-        QTimer * timer = new QTimer();
-        connect(timer, SIGNAL(timeout()),this,SLOT (move_down()));
-        timer->start(50);
-    }
-    if(arr_decider == 6 && final_random == 2){
+    // if(arr_decider == 6 && final_random == 0 && !Player::Down){
+    //     // move down
+    //     QTimer * timer = new QTimer();
+    //     connect(timer, SIGNAL(timeout()),this,SLOT (move_down()));
+    //     timer->start(50);
+    //     if(Player::Down){
+    //         timer->stop();
+    //     }
+    // }
+    if(y() == 500 && !Player::Up){
         // move up
         QTimer * timer = new QTimer();
         connect(timer, SIGNAL(timeout()),this,SLOT (move_up()));
         timer->start(50);
+        if(Player::Up){
+            timer->stop();
+        }
     }
 
+    if(Player::Right){
+        QTimer * timer = new QTimer();
+        timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(goToClanRight()));
+        timer->start(50);
+        if(clanCollision){
+            timer->stop();
+        }
+    }
+    if(Player::Left){
+        QTimer * timer = new QTimer();
+        timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(goToClanLeft()));
+        timer->start(50);
+        if(clanCollision){
+            timer->stop();
+        }
+    }
+    if(Player::Up){
+        QTimer * timer = new QTimer();
+        timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(goToClanUp()));
+        timer->start(50);
+        if(clanCollision){
+            timer->stop();
+        }
+    }
+    if(Player::Down){
+        QTimer * timer = new QTimer();
+        timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(goToClanLDown()));
+        timer->start(50);
+        if(clanCollision){
+            timer->stop();
+        }
+    }
 
    /* while (is_hit = true && arr[0]->getHealth() > 0){
         arr[0]->decHealth();
