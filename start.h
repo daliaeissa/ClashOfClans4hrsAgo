@@ -1,23 +1,27 @@
 #ifndef START_H
 #define START_H
+#include <QDialog>
 
-#include <QMainWindow>
-
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class Start;
-}
-QT_END_NAMESPACE
-
-class Start : public QMainWindow
+namespace Ui
 {
-    Q_OBJECT
+class startwindow;
+}
+
+class startwindow: public QDialog
+{
+    Q_OBJECT;
 
 public:
-    Start(QWidget *parent = nullptr);
-    ~Start();
+    explicit startwindow(QWidget *parent = nullptr);
+    ~startwindow();
+
+
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
-    Ui::Start *ui;
+    Ui::startwindow *ui;
 };
+
 #endif // START_H

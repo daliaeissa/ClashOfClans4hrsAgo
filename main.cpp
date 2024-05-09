@@ -183,7 +183,7 @@ int main(int argc, char *argv[])
     time_worker4->start(30);
 
     view.show();
-    Start w;
-    w.show();
+    // Start w;
+    // w.show();
     return a.exec();
 }

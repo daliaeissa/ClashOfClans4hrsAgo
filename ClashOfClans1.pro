@@ -15,7 +15,6 @@ SOURCES += \
     fence.cpp \
     main.cpp \
     player.cpp \
-    start.cpp \
     worker.cpp
 
 HEADERS += \
@@ -24,11 +23,9 @@ HEADERS += \
     enemy.h \
     fence.h \
     player.h \
-    start.h \
     worker.h
 
-FORMS += \
-    start.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

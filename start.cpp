@@ -1,15 +1,26 @@
 #include "start.h"
 #include "ui_start.h"
+#include <QPixmap>
 
-Start::Start(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::Start)
+
+startwindow::startwindow(QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::start)
 {
     ui->setupUi(this);
+
+
 }
 
-Start::~Start()
+startWindow::~startWindow()
 {
-
     delete ui;
+}
+
+
+
+void WelcomeWindow::on_pushButton_clicked()
+{
+    hide();
+
 }

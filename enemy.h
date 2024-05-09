@@ -32,6 +32,7 @@ public slots:
     void goToClanLeft();
     void goToClanUp();
     void goToClanDown();
+    void hit_clan();
     //void decHealth(int i);
     //void hit_fence();
     //void display();

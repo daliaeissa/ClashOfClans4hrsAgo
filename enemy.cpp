@@ -34,54 +34,73 @@ void Enemy::hit(int i){
     }
 }
 
+void Enemy::hit_clan(){
+    Clan::clan_health -= 1;
+}
+
 void Enemy::goToClanRight(){
     if(x()<=225 && y()<=300){
-        setPos(x()+5,y()+5);
+        setPos(x()+5,y()+4);
     }
-    if(x()<=225 && y()>300){
-        setPos(x()+5,y()-5);
+    if(x()<=225 && 200<y() && y()<320){
+        setPos(x()+11,y()+5);
+    }
+    if(x()<=220 && y()>300){
+        setPos(x()+4,y()-4);
     }
     QList<QGraphicsItem*> colliding_itemsClan = collidingItems();
     for(int i = 0; i < colliding_itemsClan.size(); i++){
         if(typeid(*(colliding_itemsClan[i])) == typeid(Clan))
         {
             clanCollision = true;
+            Clan::counter++;
             setPos(x(),y());
+            hit_clan();
+            qDebug() << "Clan healh:";
         }
     }
 }
 void Enemy::goToClanLeft(){
-    if(x()>=300 && y()<=300){
-        setPos(x()-5,y()+5);
+    if(x()>=250 && y()<=300){
+        setPos(x()-5.5,y()+3);
     }
-    if(x()>300 && y()>300){
-        setPos(x()-5,y()-5);
+    if(x()>250 && 200<y() && y()<320){
+        setPos(x()-5,y()+1);
+    }
+    if(x()>=250 && y()>300){
+        setPos(x()-5,y()-6);
     }
     QList<QGraphicsItem*> colliding_itemsClan = collidingItems();
     for(int i = 0; i < colliding_itemsClan.size(); i++){
         if(typeid(*(colliding_itemsClan[i])) == typeid(Clan))
         {
             clanCollision = true;
+            Clan::counter++;
             setPos(x(),y());
+            hit_clan();
+            qDebug() << "Clan healh:";
         }
     }
 }
 void Enemy::goToClanUp(){
-    if(x()<=225 && y()>=300){
-        setPos(x()+1,y()-1);
-    }
-    if(x()>=275 && y()>300){
-        setPos(x()-1,y()-1);
-    }
-    if(x()>225 && x()<275 && y()>300){
+    if(x()<=250 && y()>=350){
         setPos(x(),y()-5);
     }
+    // if(x()>250 && y()>=300){
+    //     setPos(x()-1,y()-1);
+    // }
+    // if(x()>225 && x()<275 && y()>300){
+    //     setPos(x(),y()-5);
+    // }
     QList<QGraphicsItem*> colliding_itemsClan = collidingItems();
     for(int i = 0; i < colliding_itemsClan.size(); i++){
         if(typeid(*(colliding_itemsClan[i])) == typeid(Clan))
         {
             clanCollision = true;
+            Clan::counter++;
             setPos(x(),y());
+            hit_clan();
+            qDebug() << "Clan healh:" << Clan::clan_health;
         }
     }
 }
@@ -424,10 +443,11 @@ Enemy::Enemy(Fence** arr):arr(arr) {
 
     int left_x = 0;
     int right_x = 550;
-    int LR_y = (rand() % 3 + 1) * 100;
+    int LR_y = (rand() % 3 + 1) * 100+20;
 
     int down_y = 500;
-    int down_x = (rand() % 2 + 2) * 100;
+    // int down_x = (rand() % 2 + 2) * 100;
+    int down_x = 250;
 
     // Decides left or right or down
     // int direction_arr1[2] = {left_x, right_x};

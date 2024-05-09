@@ -3,6 +3,7 @@
 #include<QTimer>
 #include"Enemy.h"
 #include"player.h"
+#include"clan.h"
 
 Bullet::Bullet(int a) {
     QPixmap bulletpic("C:/Users/omars/OneDrive/Desktop/Uni/AUC/Semester 6/CS II/Project/ClashOfClans1/Images/Bullet.png");
@@ -64,6 +65,7 @@ void Bullet::move() {
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if (typeid(*(colliding_items[i])) == typeid(Enemy)){
             if(scene()){
+                Clan::counter--;
                 scene()->removeItem(colliding_items[i]);
                 scene()->removeItem(this);
                 delete colliding_items[i];
