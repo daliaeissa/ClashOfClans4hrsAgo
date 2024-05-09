@@ -4,6 +4,8 @@
 
 int Clan::clan_health = 200;
 int Clan::counter = 0;
+bool Clan::end_of_time = false;
+
 
 Clan::Clan() {
 

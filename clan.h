@@ -10,6 +10,7 @@ public:
     Clan();
     static int clan_health;
     static int counter;
+    static bool end_of_time;
 
 public slots:
     void setHealth(int clan_health);

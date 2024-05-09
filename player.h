@@ -19,6 +19,7 @@ public:
     static bool Left;
     static bool Up;
     static bool Down;
+    static bool started;
 public slots:
     void createEnemy();
     void keyPressEvent(QKeyEvent * event) override;

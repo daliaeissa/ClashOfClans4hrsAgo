@@ -17,7 +17,7 @@ bool Player::Right = false;
 bool Player::Left = false;
 bool Player::Up = false;
 bool Player::Down = false;
-
+bool Player::started = false;
 
 
 void Player::createEnemy(){

@@ -13,8 +13,11 @@ SOURCES += \
     clan.cpp \
     enemy.cpp \
     fence.cpp \
+    game.cpp \
+    gameworker.cpp \
     main.cpp \
     player.cpp \
+    startmenu.cpp \
     worker.cpp
 
 HEADERS += \
@@ -22,10 +25,14 @@ HEADERS += \
     clan.h \
     enemy.h \
     fence.h \
+    game.h \
+    gameworker.h \
     player.h \
+    startmenu.h \
     worker.h
 
-FORMS +=
+FORMS += \
+    startmenu.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
