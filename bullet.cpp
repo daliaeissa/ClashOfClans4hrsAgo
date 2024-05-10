@@ -6,7 +6,7 @@
 #include"clan.h"
 
 Bullet::Bullet(int a) {
-    QPixmap bulletpic("C:/Users/omars/OneDrive/Desktop/Uni/AUC/Semester 6/CS II/Project/ClashOfClans1/Images/Bullet.png");
+    QPixmap bulletpic("C:/Users/dalia/OneDrive/Desktop/Spring 2024 semester/Computer Science 2/Project/ClashOfClansLevels3/Images/Bullet.png");
     setPixmap(bulletpic.scaled(50, 50));
     setPos(240, 200);
     QTimer * timer = new QTimer();

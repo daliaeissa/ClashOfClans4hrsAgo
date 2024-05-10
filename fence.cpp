@@ -24,10 +24,15 @@ void Fence::set_hit(){
 int Fence::health = 100;
 bool Fence::is_hit = false;
 
-Fence::Fence(int x, int y):x(x),y(y) {
+Fence::Fence(int x, int y, QGraphicsScene *scene, int w, int l):x(x),y(y),w(w),l(l) {
     /*QTimer * time1 = new QTimer();
     QObject::connect(time1, SIGNAL(timeout()),this,SLOT(Display()));
     time1->start(1000);*/
+    QPixmap fencePixmap("C:/Users/dalia/OneDrive/Desktop/Spring 2024 semester/Computer Science 2/Project/ClashOfClansLevels3/Images/wall6.png");
+    setPixmap(fencePixmap.scaled(w, l));
+    setPos(x, y);
+    scene->addItem(this);
+    qDebug() << "Fence pixmap";
 }
 /*void Fence::Display()
 {

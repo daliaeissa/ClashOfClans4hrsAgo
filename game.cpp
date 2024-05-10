@@ -55,21 +55,28 @@ void game::initializeGame()
     char *argv[] = { arg, nullptr }; // Default value for argv
     QApplication a(argc, argv);
 
+
+    // Create scene
+    QGraphicsScene scene;
+
     // Create Clan
-    Clan *clan = new Clan();
-    clan->setRect(250, 300, 50, 50);
+    Clan *clan = new Clan(&scene);
+    //clan->setRect(250, 300, 50, 50);
     // Fences
-    Fence *LeftFence = new Fence(400, 350);
-    LeftFence->setRect(150, 50, 50, 400);
+    //Fence *LeftFence = new Fence(400, 350, &scene, 50, 400);
+    Fence *LeftFence = new Fence(140, -47, &scene, 70, 556);
+    //LeftFence->setRect(150, 50, 50, 400);
     // LeftFence->Display();
-    Fence *RightFence = new Fence(400, 350);
-    RightFence->setRect(400, 50, 50, 400);
+    //Fence *RightFence = new Fence(400, 350, &scene, 50, 400);
+    Fence *RightFence = new Fence(390, -47, &scene, 70, 556);
+    //RightFence->setRect(400, 50, 50, 400);
     // RightFence->Display();
-    Fence *TopFence = new Fence(400, 350);
-    TopFence->setRect(200, 50, 200, 50);
+    // Fence *TopFence = new Fence(400, 350, &scene, 200, 50);
+    Fence *TopFence = new Fence(150, 38, &scene, 300, 70);
+    //TopFence->setRect(200, 50, 200, 50);
     // TopFence->Display();
-    Fence *BottomFence = new Fence(400, 350);
-    BottomFence->setRect(200, 400, 200, 50);
+    Fence *BottomFence = new Fence(150, 388, &scene, 300, 70);
+    //BottomFence->setRect(200, 400, 200, 50);
     // BottomFence->Display();
 
     // Array of fences
@@ -77,8 +84,6 @@ void game::initializeGame()
                       fence13, fence14, fence15, fence16, fence17,fence18, fence19, fence20, fence21, fence22, fence23, fence24};*/
 
 
-    // Create scene
-    QGraphicsScene scene;
     // Create Player (Cannon)
 
     //player->setRect(250, 200, 50, 50);

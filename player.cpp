@@ -7,7 +7,7 @@
 #include<QDebug>
 
 Player::Player(QGraphicsScene* scene, Fence** arr) : arr(arr) {
-    QPixmap playerPixmap("C:/Users/omars/OneDrive/Desktop/Uni/AUC/Semester 6/CS II/Project/ClashOfClans1/Images/Player.png");
+    QPixmap playerPixmap("C:/Users/dalia/OneDrive/Desktop/Spring 2024 semester/Computer Science 2/Project/ClashOfClansLevels3/Images/Player.png");
     setPixmap(playerPixmap.scaled(50, 50));
     setPos(250, 200);
     scene->addItem(this); // Add the player to the scene
