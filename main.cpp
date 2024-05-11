@@ -18,6 +18,8 @@
 #include <QPointF>
 #include<vector>
 #include"Levels.h"
+#include"congratulationsmenu.h"
+#include "startmenu.h"
 
 // Define a structure to represent a node
 struct Node {
@@ -29,6 +31,15 @@ struct Node {
 };
 
 void next_level(QGraphicsScene &scene, QGraphicsView &view){
+
+    QGraphicsPixmapItem *background = new QGraphicsPixmapItem();
+    QPixmap backpic("C:/Users/dalia/OneDrive/Desktop/Spring 2024 semester/Computer Science 2/Project/ClashOfClansLevels3/Images/Background.jpg");
+    background->setPixmap(backpic);
+    background->setPos(0,0);
+    QSize newSize(700, 900); // Set the new size (width, height) as needed
+    background->setScale(1.0); // Reset scale to 1.0 to ensure original size
+    background->setTransform(QTransform().scale(newSize.width() / backpic.width(), newSize.height() / backpic.height()));
+    scene.addItem(background);
     // Create Clan
     Clan *clan = new Clan(&scene);
     Clan::end_of_time = false;
@@ -124,22 +135,22 @@ void next_level(QGraphicsScene &scene, QGraphicsView &view){
     player->setFocus();
     //scene.addItem(health_display);
     // Putting workers
-    worker* worker1 = new worker();
+    worker* worker1 = new worker(240, 300, &scene);
     //worker1->setRect(200,225,50,50);
-    worker1->setRect(240,300,25,25);//right of clan
-    scene.addItem(worker1);
-    worker* worker2 = new worker();
+    //worker1->setRect(240,300,25,25);//right of clan
+    //scene.addItem(worker1);
+    worker* worker2 = new worker(260, 300, &scene);
     //worker2->setRect(350,225,50,50);
-    worker2->setRect(260,300,25,25);//left of clan
-    scene.addItem(worker2);
-    worker* worker3 = new worker();
+    //worker2->setRect(260,300,25,25);//left of clan
+    //scene.addItem(worker2);
+    worker* worker3 = new worker(250, 290, &scene);
     //worker3->setRect(275,100,50,50);
-    worker3->setRect(250,290,25,25);//top of clan
-    scene.addItem(worker3);
-    worker* worker4 = new worker();
+    //worker3->setRect(250,290,25,25);//top of clan
+    //scene.addItem(worker3);
+    worker* worker4 = new worker(250, 310, &scene);
     //worker4->setRect(275,350,50,50);
-    worker4->setRect(250,310,25,25);//bottom of clan
-    scene.addItem(worker4);
+    //worker4->setRect(250,310,25,25);//bottom of clan
+    //scene.addItem(worker4);
 
     QTimer * time_enemy = new QTimer();
     QObject::connect(time_enemy, SIGNAL(timeout()),player,SLOT(createEnemy()));
@@ -162,14 +173,18 @@ void next_level(QGraphicsScene &scene, QGraphicsView &view){
     QTimer timer;
 
     // Set the interval to 5 minutes (300,000 milliseconds)
-    timer.setInterval(0.05 * 60 * 1000); // 5 minutes * 60 seconds * 1000 milliseconds
+    timer.setInterval(0.01 * 60 * 1000); // 5 minutes * 60 seconds * 1000 milliseconds
 
     // Connect the timeout signal of the timer to a lambda function
     QObject::connect(&timer, &QTimer::timeout, [&]() {
         qDebug() << "Time's up!";
         Clan::end_of_time = true;
-        scene.clear();
         Levels::level_counter -= 1;
+        qDebug() << "Level counter" << Levels::level_counter;
+        //if (Levels::level_counter == 2){
+            scene.clear();
+        //}
+        scene.clear();
         next_level(scene,view);
     });
 
@@ -177,13 +192,15 @@ void next_level(QGraphicsScene &scene, QGraphicsView &view){
     timer.start();
 
     view.show();
+    CongratulationsMenu* congrats_menu = new CongratulationsMenu();
+    congrats_menu->show();
 }
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    StartMenu *start = new StartMenu();
     // Define the size of the playable area and the size of each node
     int areaWidth = 200;
     int areaHeight = 300;
@@ -218,6 +235,15 @@ int main(int argc, char *argv[])
 
     // Create scene
     QGraphicsScene scene;
+
+    QGraphicsPixmapItem *background = new QGraphicsPixmapItem();
+    QPixmap backpic("C:/Users/dalia/OneDrive/Desktop/Spring 2024 semester/Computer Science 2/Project/ClashOfClansLevels3/Images/Background.jpg");
+    background->setPixmap(backpic);
+    background->setPos(0,0);
+    QSize newSize(700, 900); // Set the new size (width, height) as needed
+    background->setScale(1.0); // Reset scale to 1.0 to ensure original size
+    background->setTransform(QTransform().scale(newSize.width() / backpic.width(), newSize.height() / backpic.height()));
+    scene.addItem(background);
 
     // Create Clan
     Clan *clan = new Clan(&scene);
@@ -310,22 +336,22 @@ int main(int argc, char *argv[])
 
     //scene.addItem(health_display);
     // Putting workers
-    worker* worker1 = new worker();
+    worker* worker1 = new worker(240, 300, &scene);
     //worker1->setRect(200,225,50,50);
-    worker1->setRect(240,300,25,25);//right of clan
-    scene.addItem(worker1);
-    worker* worker2 = new worker();
+    //worker1->setRect(240,300,25,25);//right of clan
+    //scene.addItem(worker1);
+    worker* worker2 = new worker(260, 300, &scene);
     //worker2->setRect(350,225,50,50);
-    worker2->setRect(260,300,25,25);//left of clan
-    scene.addItem(worker2);
-    worker* worker3 = new worker();
+    //worker2->setRect(260,300,25,25);//left of clan
+    //scene.addItem(worker2);
+    worker* worker3 = new worker(250, 290, &scene);
     //worker3->setRect(275,100,50,50);
-    worker3->setRect(250,290,25,25);//top of clan
-    scene.addItem(worker3);
-    worker* worker4 = new worker();
+    //worker3->setRect(250,290,25,25);//top of clan
+    //scene.addItem(worker3);
+    worker* worker4 = new worker(250, 310, &scene);
     //worker4->setRect(275,350,50,50);
-    worker4->setRect(250,310,25,25);//bottom of clan
-    scene.addItem(worker4);
+    //worker4->setRect(250,310,25,25);//bottom of clan
+    //scene.addItem(worker4);
 
     //Create view
 
@@ -372,8 +398,8 @@ int main(int argc, char *argv[])
 
     // Start the timer
     timer.start();
-
     view.show();
+    start->show();
     // Start w;
     // w.show();
     return a.exec();

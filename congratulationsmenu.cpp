@@ -12,3 +12,9 @@ CongratulationsMenu::~CongratulationsMenu()
 {
     delete ui;
 }
+
+void CongratulationsMenu::on_NextLevelButton_clicked()
+{
+    hide();
+}
+

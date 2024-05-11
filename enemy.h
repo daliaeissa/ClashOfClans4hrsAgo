@@ -20,7 +20,7 @@ public:
     static int health_3;
     static int health_4;
     int health_arr[4] = {health_1, health_2, health_3, health_4};
-    int enemy_health = 3;
+    static int enemy_health;
     bool clanCollision = false;
 
 public slots:

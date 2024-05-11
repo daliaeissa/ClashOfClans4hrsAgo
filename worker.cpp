@@ -1,8 +1,14 @@
 #include "worker.h"
 #include<QTimer>
 #include "fence.h"
+#include<QGraphicsPixmapItem>
+#include<QPixmap>
 
-worker::worker() {
+worker::worker(int x, int y, QGraphicsScene *scene): x(x),y(y) {
+    QPixmap workerpix("C:/Users/dalia/OneDrive/Desktop/Spring 2024 semester/Computer Science 2/Project/ClashOfClansLevels3/Images/worker.png");
+    setPixmap(workerpix.scaled(25, 25));
+    setPos(x, y);
+    scene->addItem(this);
 }
 
 

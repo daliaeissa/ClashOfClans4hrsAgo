@@ -16,6 +16,7 @@
 #include"ui_gameovermenu.h"
 #include"congratulationsmenu.h"
 #include"ui_congratulationsmenu.h"
+#include"levels.h"
 
 /*void Enemy::hit_fence(){
     Fence::decHealth();
@@ -29,6 +30,7 @@ int Enemy::health_1 = 200;
 int Enemy::health_2 = 200;
 int Enemy::health_3 = 200;
 int Enemy::health_4 = 200;
+int Enemy::enemy_health = 0;
 
 void Enemy::hit(int i){
     //arr[i]->setHealth(100)
@@ -201,6 +203,11 @@ void Enemy::goToClanUp(){
             gameover_menu->show();
         }
         else if (!(Clan::clan_health == 0) && Clan::end_of_time && scene()){
+            scene()->clear();
+            CongratulationsMenu* congrats_menu = new CongratulationsMenu();
+            congrats_menu->show();
+        }
+        if (Levels::level_counter == 2 && scene() && !(Clan::clan_health == 0) && Clan::end_of_time) {
             scene()->clear();
             CongratulationsMenu* congrats_menu = new CongratulationsMenu();
             congrats_menu->show();
@@ -551,6 +558,20 @@ Enemy::Enemy(Fence** arr):arr(arr) {
     int left_x = 0;
     int right_x = 550;
     int LR_y = (rand() % 3 + 1) * 100+20;
+
+    if(Levels::level_counter ==5) { //level 2
+        enemy_health++;
+    }
+    if(Levels::level_counter ==4) {
+        enemy_health+=2;
+    }
+    if(Levels::level_counter ==3) {
+        enemy_health+=3;
+    }
+    if(Levels::level_counter ==2) { //level 5
+        enemy_health+=4;
+    }
+
 
     int down_y = 500;
     // int down_x = (rand() % 2 + 2) * 100;

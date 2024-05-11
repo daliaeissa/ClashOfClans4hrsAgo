@@ -6,24 +6,37 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>575</width>
+    <height>427</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="StartButton">
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>170</y>
-     <width>93</width>
-     <height>29</height>
+     <y>160</y>
+     <width>80</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="text">
     <string>Start</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ExitButton">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>160</y>
+     <width>80</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Exit</string>
    </property>
   </widget>
  </widget>

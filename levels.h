@@ -5,6 +5,7 @@ class Levels
 {
 public:
     static int level_counter;
+    static int enemy_counter;
     Levels();
 };
 

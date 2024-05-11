@@ -4,6 +4,7 @@
 #include"Enemy.h"
 #include"player.h"
 #include"clan.h"
+#include"Levels.h"
 
 Bullet::Bullet(int a) {
     QPixmap bulletpic("C:/Users/dalia/OneDrive/Desktop/Spring 2024 semester/Computer Science 2/Project/ClashOfClansLevels3/Images/Bullet.png");
@@ -65,11 +66,23 @@ void Bullet::move() {
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if (typeid(*(colliding_items[i])) == typeid(Enemy)){
             if(scene()){
-                Clan::counter--;
-                scene()->removeItem(colliding_items[i]);
-                scene()->removeItem(this);
-                delete colliding_items[i];
-                delete this;
+                if(Enemy::enemy_health>0 && scene()){
+                    if(Levels::enemy_counter < 20){
+                        Enemy::enemy_health-=1;
+                    }
+                    else if(Levels::enemy_counter == 20){
+                        Enemy::enemy_health-=2;
+                    }
+                    Clan::counter--;
+                    Levels::enemy_counter++;
+                    scene()->removeItem(this);
+                    delete this;
+                }
+                if(Enemy::enemy_health == 0 && scene()){
+                    scene()->removeItem(colliding_items[i]);
+                    delete colliding_items[i];
+                }
+
                 return;
             }
 

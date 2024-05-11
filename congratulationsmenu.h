@@ -15,6 +15,9 @@ public:
     explicit CongratulationsMenu(QWidget *parent = nullptr);
     ~CongratulationsMenu();
 
+private slots:
+    void on_NextLevelButton_clicked();
+
 private:
     Ui::CongratulationsMenu *ui;
 };

@@ -18,6 +18,7 @@ SOURCES += \
     levels.cpp \
     main.cpp \
     player.cpp \
+    startmenu.cpp \
     worker.cpp
 
 HEADERS += \
@@ -29,11 +30,13 @@ HEADERS += \
     gameovermenu.h \
     levels.h \
     player.h \
+    startmenu.h \
     worker.h
 
 FORMS += \
     congratulationsmenu.ui \
-    gameovermenu.ui
+    gameovermenu.ui \
+    startmenu.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
